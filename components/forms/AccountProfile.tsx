@@ -1,3 +1,11 @@
 "use client"
 
-const AccountProfile = () => {}
+const AccountProfile = () => {
+    return (
+        <div>
+            Account Profile
+        </div>
+    )
+}
+
+export default AccountProfile;
