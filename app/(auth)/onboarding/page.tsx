@@ -5,6 +5,10 @@ async function Page() {
             <p className="mt-3 text-base-regular text-light-2">
                 Complete your profile now to use Threads
             </p>
+
+            <section className="mt-9 bg-dark-2 p-10">
+
+            </section>
         </main>
     )
 }
