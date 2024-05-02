@@ -15,9 +15,9 @@ interface Props {
 // AccountProfile accepts user and btnTitle as type Props
 const AccountProfile = ({ user, btnTitle }: Props) => {
     return (
-        <div>
-            Account Profile
-        </div>
+        <Form>
+            
+        </Form>
     )
 }
 
