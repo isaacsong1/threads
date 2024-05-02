@@ -1,3 +1,5 @@
+import AccountProfile from "@/components/forms/AccountProfile";
+
 async function Page() {
     return (
         <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
@@ -7,7 +9,7 @@ async function Page() {
             </p>
 
             <section className="mt-9 bg-dark-2 p-10">
-
+                <AccountProfile />
             </section>
         </main>
     )
