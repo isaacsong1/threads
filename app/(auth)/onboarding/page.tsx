@@ -1,6 +1,9 @@
 import AccountProfile from "@/components/forms/AccountProfile";
+import { currentUser } from "@clerk/nextjs/server";
 
 async function Page() {
+    const user = await currentUser();
+
     return (
         <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
             <h1 className="head-text">Onboarding</h1>
