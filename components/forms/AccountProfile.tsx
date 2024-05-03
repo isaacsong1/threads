@@ -5,6 +5,7 @@ import {
     Form
 } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { UserValidation } from '@/lib/validations/user';
 
 // Defines Props as an interface
 interface Props {
@@ -21,7 +22,7 @@ interface Props {
 // AccountProfile accepts user and btnTitle as type Props
 const AccountProfile = ({ user, btnTitle }: Props) => {
     const form = useForm({
-        resolver:
+        resolver: zodResolver(UserValidation)
     })
 
     return (
