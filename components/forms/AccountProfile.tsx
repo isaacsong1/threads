@@ -22,7 +22,13 @@ interface Props {
 // AccountProfile accepts user and btnTitle as type Props
 const AccountProfile = ({ user, btnTitle }: Props) => {
     const form = useForm({
-        resolver: zodResolver(UserValidation)
+        resolver: zodResolver(UserValidation),
+        defaultValues: {
+            profile_photo: '',
+            name: '',
+            username: '',
+            bio: ''
+        }
     })
 
     return (
