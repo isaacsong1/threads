@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod"
 import { UserValidation } from '@/lib/validations/user';
 import Image from "next/image";
+import { ChangeEvent } from 'react';
 
 // Defines Props as an interface
 interface Props {
@@ -41,6 +42,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             bio: ''
         }
     })
+
+    const handleImage = (e: ChangeEvent, fieldChange: (value: string) => void) => {
+        e.preventDefault();
+    }
 
     // Submit handler
     function onSubmit(values: z.infer<typeof UserValidation>) {
@@ -80,8 +85,14 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                     />
                                 )}
                             </FormLabel>
-                            <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                            <FormControl className="flex-1 text-base-semibold text-gray-200">
+                                <Input 
+                                    type="file"
+                                    accept="image/*"
+                                    placeholder="Upload a photo"
+                                    className="account-form_image_input"
+                                    onChange={e => handleImage(e, field.onChange)}
+                                />
                             </FormControl>
                             <FormDescription>
                                 This is your public display name.
