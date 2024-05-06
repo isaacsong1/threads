@@ -99,7 +99,25 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     )}
                 />
 
-                
+                {/* Form field for name */}
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem className="flex items-center gap-3 w-full">
+                            <FormLabel className="text-base-semibold text-light-2">
+                                Name
+                            </FormLabel>
+                            <FormControl className="flex-1 text-base-semibold text-gray-200">
+                                <Input 
+                                    type="text"
+                                    className="account-form_input no-focus"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
                 
                 <Button type="submit">Submit</Button>
             </form>
