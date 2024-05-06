@@ -60,6 +60,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)} 
                 className="flex flex-col justify-start gap-10"
             >
+                {/* Form field for Profile Photo */}
                 <FormField
                     control={form.control}
                     name="profile_photo"
@@ -94,13 +95,12 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                     onChange={e => handleImage(e, field.onChange)}
                                 />
                             </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />
+
+                
+                
                 <Button type="submit">Submit</Button>
             </form>
         </Form>
