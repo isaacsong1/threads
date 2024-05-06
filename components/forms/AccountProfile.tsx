@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from "zod"
 import { UserValidation } from '@/lib/validations/user';
 
 // Defines Props as an interface
@@ -24,7 +25,8 @@ interface Props {
         name: string;
         bio: string;
         image: string;
-    }
+    };
+    btnTitle: string;
 }
 
 // AccountProfile accepts user and btnTitle as type Props
@@ -40,28 +42,31 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     })
 
     // Submit handler
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit(values: z.infer<typeof UserValidation>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
     }
 
     return (
-
-        <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                    </FormControl>
-                    <FormDescription>This is your public display name.</FormDescription>
-                    <FormMessage />
-                </FormItem>
-            )}
-        />
+        <Form {...form}>
+            <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Username</FormLabel>
+                        <FormControl>
+                            <Input placeholder="shadcn" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                            This is your public display name.
+                        </FormDescription>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </Form>
     )
 }
 
