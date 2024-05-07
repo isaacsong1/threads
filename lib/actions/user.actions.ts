@@ -2,6 +2,7 @@
 
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
+import { revalidatePath } from 'next/cache'
 
 export async function updateUser(
     userId: string,
@@ -23,5 +24,9 @@ export async function updateUser(
             onboarded: true,
         },
         { upsert: true }
-    )
+    );
+
+    if (path === 'profile/edit') {
+        revalidatePath(path);
+    }
 }
