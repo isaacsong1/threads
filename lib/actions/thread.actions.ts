@@ -32,3 +32,11 @@ export async function createThread({ text, author, communityId, path }: Params) 
         throw new Error(`Error creating thread: ${error.message}`)
     }
 };
+
+export async function fetchThreads(pageNumber = 1, pageSize = 20) {
+    connectToDB();
+
+    // Fetch the threads that have no parents (top-level threads...)
+    const threadsQuery = Thread.find({ parendId: { $in: [null, undefined]}})
+        .sort({createdAt: 'desc'})
+}
