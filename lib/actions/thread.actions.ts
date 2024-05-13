@@ -40,7 +40,7 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
     const skipAmount = (pageNumber - 1) * pageSize;
 
     // Fetch the threads that have no parents (top-level threads...)
-    const threadsQuery = Thread.find({ parendId: { $in: [null, undefined]}})
+    const threadsQuery = Thread.find({ parendId: { $in: [null, undefined] }})
         .sort({createdAt: 'desc'})
         .skip(skipAmount)
         .limit(pageSize)
@@ -53,4 +53,12 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
                 select: "_id name parentId image"
             }
         })
+
+    const totalThreadsCount = await Thread.countDocuments({ parendId: { $in: [null, undefined] }});
+
+    const threads = await threadsQuery.exec();
+
+    const isNext = totalThreadsCount > skipAmount + threads.length;
+
+    return { threads, isNext };
 }
