@@ -44,14 +44,15 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
         .sort({createdAt: 'desc'})
         .skip(skipAmount)
         .limit(pageSize)
-        .populate({ path: 'author', model: User })
+        .populate({ path: 'author', model: User, options: {strictPopulate: false} })
         .populate({ 
             path: 'chlidren',
             populate: {
                 path: 'author',
                 model: User,
                 select: "_id name parentId image"
-            }
+            },
+            options: {strictPopulate: false}
         })
 
     const totalThreadsCount = await Thread.countDocuments({ parendId: { $in: [null, undefined] }});
