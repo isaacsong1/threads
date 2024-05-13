@@ -36,7 +36,21 @@ export async function createThread({ text, author, communityId, path }: Params) 
 export async function fetchThreads(pageNumber = 1, pageSize = 20) {
     connectToDB();
 
+    // Calculate the number of posts to skip
+    const skipAmount = (pageNumber - 1) * pageSize;
+
     // Fetch the threads that have no parents (top-level threads...)
     const threadsQuery = Thread.find({ parendId: { $in: [null, undefined]}})
         .sort({createdAt: 'desc'})
+        .skip(skipAmount)
+        .limit(pageSize)
+        .populate({ path: 'author', model: User })
+        .populate({ 
+            path: 'chlidren',
+            populate: {
+                path: 'author',
+                model: User,
+                select: "_id name parentId image"
+            }
+        })
 }
