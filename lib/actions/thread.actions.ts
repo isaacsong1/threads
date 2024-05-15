@@ -69,12 +69,31 @@ export async function fetchThreadById(id: string) {
 
     try {
         // TODO: Populate Community
-        
+
         const thread = await Thread.findById(id)
         .populate({
             path: 'author',
             model: User,
-            select: "_id id name image"
+            select: '_id id name image'
+        })
+        .populate({
+            path: 'children',
+            populate: [
+                {
+                    path: 'author',
+                    model: User,
+                    select: '_id id name parentId image'
+                },
+                {
+                    path: 'children',
+                    model: Thread,
+                    populate: {
+                        path: 'author',
+                        model: User,
+                        select: '_id id name parentId image'
+                    }
+                }
+            ]
         })
     } catch (error: any) {
 
