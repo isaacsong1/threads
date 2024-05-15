@@ -1,4 +1,4 @@
-const Page = () => {
+const Page = ({ params }: { params: { id: string}}) => {
 
 }
 
