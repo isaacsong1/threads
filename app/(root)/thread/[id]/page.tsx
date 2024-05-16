@@ -30,6 +30,10 @@ const Page = async ({ params }: { params: { id: string}}) => {
                     comments={thread.children}
                 />
             </div>
+
+            <div className="mt-7">
+                <Comment />
+            </div>
         </section>
     )
 }
