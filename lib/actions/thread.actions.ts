@@ -125,6 +125,9 @@ export async function addCommentToThread(
             parentId: threadId
         })
 
+        // Save the new thread
+        const savedCommentThread = await commentThread.save();
+        
 
     } catch (error: any) {
         throw new Error(`Error adding comment to thread: ${error.message}`)
