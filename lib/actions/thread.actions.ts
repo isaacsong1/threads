@@ -131,6 +131,10 @@ export async function addCommentToThread(
         // Update the original thread to include the new comment
         originalThread.children.push(savedCommentThread._id);
 
+        // Save the original thread
+        await originalThread.save();
+
+        revalidatePath(path);
     } catch (error: any) {
         throw new Error(`Error adding comment to thread: ${error.message}`)
     }
