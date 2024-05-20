@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface Props {
     accountId: string;
     authUserId: string;
@@ -10,8 +12,19 @@ interface Props {
 const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio,
 }: Props) => {
     return (
-        <div>
-            <h1>Profile Header</h1>
+        <div className="flex w-full flex-col justify-start">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <div>
+                        <Image 
+                            src={imgUrl}
+                            alt="Profile Image"
+                            fill
+                            className="rounded-full object-cover shadow-2xl"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
