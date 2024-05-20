@@ -5,13 +5,9 @@ import { redirect } from 'next/navigation';
 
 async function Page({ params }: { params: {id: string}}) {
     const user = await currentUser();
-
-    console.log(user);
-
     if (!user) return null
 
     const userInfo = await fetchUser(params.id);
-
     if (!userInfo?.onboarded) redirect('/onboarding');
 
     return (
