@@ -1,5 +1,6 @@
 "use server"
 
+import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { revalidatePath } from 'next/cache'
@@ -26,7 +27,7 @@ export async function updateUser({
     try {
         await User.findOneAndUpdate(
             { id: userId },
-            { 
+            {
                 username: username.toLowerCase(),
                 name,
                 bio,
@@ -35,7 +36,7 @@ export async function updateUser({
             },
             { upsert: true } // Update if data exists, insert if not
         );
-    
+
         if (path === 'profile/edit') {
             revalidatePath(path);
         };
@@ -50,11 +51,39 @@ export async function fetchUser(userId: string) {
 
         return await User
             .findOne({ id: userId })
-            // .populate({
-            //     path: 'communities',
-            //     model: Community
-            // })
+        // .populate({
+        //     path: 'communities',
+        //     model: Community
+        // })
     } catch (error: any) {
         new Error(`Failed to fetch user: ${error.message}`);
+    }
+}
+
+export async function fetchUserThreads(userId: string) {
+    try {
+        connectToDB();
+
+        // Find all threads authored by the user with the given userId
+        // TODO: Populate community
+        const threads = await User.findOne({ id: userId })
+            .populate({
+                path: "threads",
+                model: Thread,
+                populate: [
+                    {
+                        path: "children",
+                        model: Thread,
+                        populate: {
+                            path: "author",
+                            model: User,
+                            select: "name image id", // Select the "name" and "_id" fields from the "User" model
+                        },
+                    },
+                ],
+            });
+        return threads;
+    } catch (error: any) {
+        throw new Error(`Failed to fetch user threads: ${error.message}`);
     }
 }
