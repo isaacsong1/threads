@@ -13,7 +13,9 @@ async function Page({ params }: { params: {id: string}}) {
 
     return (
         <section>
-            Profile
+            <ProfileHeader 
+            
+            />
         </section>
     )
 }
