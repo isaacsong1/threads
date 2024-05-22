@@ -1,6 +1,6 @@
 "use server"
 
-import { SortOrder } from "mongoose";
+import { FilterQuery, SortOrder } from "mongoose";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
@@ -107,7 +107,21 @@ export async function fetchUsers({
 
         const skipAmount = (pageNumber - 1) * pageSize;
 
+        // Case insensitive
         const regex = new RegExp(searchString, "i");
+
+        const query: FilterQuery<typeof User> = {
+            // Not equal to userId (Filter out current user)
+            id: { $ne: userId }
+        }
+
+        // Add query if searchString is non empty
+        if (searchString.trim() !== '') {
+            query.$or = [
+                { username: { $regex: regex } },
+                { name: { $regex: regex } }
+            ]
+        }
     } catch (error: any) {
         throw new Error(`Failed to fetch user threads: ${error.message}`);
     }
