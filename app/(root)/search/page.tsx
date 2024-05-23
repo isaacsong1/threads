@@ -1,4 +1,4 @@
-import { fetchUser } from '@/lib/actions/user.actions';
+import { fetchUser, fetchUsers } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import Image from "next/image";
@@ -13,6 +13,12 @@ async function Page() {
     if (!userInfo?.onboarded) redirect('/onboarding');
 
     // Fetch all users
+    const result = await fetchUsers({
+        userId: user.id,
+        searchString: '',
+        pageNumber: 1,
+        pageSize: 25
+    })
 
     return (
         <section>
