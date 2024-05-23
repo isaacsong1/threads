@@ -122,6 +122,15 @@ export async function fetchUsers({
                 { name: { $regex: regex } }
             ]
         }
+
+        // Sorting
+        const sortOptions = { createdAt: sortBy };
+
+        // Find user based on queries
+        const usersQuery = User.find(query)
+            .sort(sortOptions)
+            .skip(skipAmount)
+            .limit(pageSize);
     } catch (error: any) {
         throw new Error(`Failed to fetch user threads: ${error.message}`);
     }
