@@ -140,6 +140,14 @@ export async function fetchUsers({
 
         return { users, isNext };
     } catch (error: any) {
-        throw new Error(`Failed to fetch user threads: ${error.message}`);
+        throw new Error(`Failed to fetch users: ${error.message}`);
+    }
+}
+
+export async function getActivity(userId: string) {
+    try {
+        
+    } catch (error: any) {
+        throw new Error(`Failed to fetch user activity: ${error.message}`)
     }
 }
