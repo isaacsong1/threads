@@ -146,6 +146,11 @@ export async function fetchUsers({
 
 export async function getActivity(userId: string) {
     try {
+        connectToDB();
+
+        // Find all threads created by the user
+        const userThreads = await Thread.find({ author: userId });
+
         
     } catch (error: any) {
         throw new Error(`Failed to fetch user activity: ${error.message}`)
