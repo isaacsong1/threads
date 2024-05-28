@@ -37,6 +37,8 @@ function PostThread({ userId }: { userId: string }) {
     const router = useRouter();
     const pathname = usePathname();
     const { organization } = useOrganization();
+
+    console.log('ORG ', organization);
     
     const form = useForm({
         resolver: zodResolver(ThreadValidation),

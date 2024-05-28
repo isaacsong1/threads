@@ -106,7 +106,7 @@ const ThreadCard = ({
                 </div>
                 {/* TODO: DeleteThread */}
                 {/* TODO: Show comment logos */}
-                { isComment && community && (
+                { !isComment && community && (
                     <Link href={`/communities/${community.id}`} className="mt-5 flex items-center">
                         <p className="text-subtle-medium text-gray-1">
                             {formatDateString(createdAt)}
