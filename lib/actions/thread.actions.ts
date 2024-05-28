@@ -19,7 +19,7 @@ export async function createThread({ text, author, communityId, path }: Params) 
         const createdThread = await Thread.create({
             text,
             author,
-            community: null,
+            community: communityId,
         });
 
         // Update user model
