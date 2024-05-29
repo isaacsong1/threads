@@ -5,6 +5,7 @@ import { profileTabs } from '@/constants';
 import ThreadsTab from '@/components/shared/ThreadsTab';
 import UserCard from '@/components/cards/UserCard';
 import { fetchCommunities } from '@/lib/actions/community.actions';
+import CommunityCard from '@/components/cards/CommunityCard';
 
 async function Page() {
     const user = await currentUser();
@@ -37,7 +38,8 @@ async function Page() {
                                 name={community.name}
                                 username={community.username}
                                 imgUrl={community.image}
-                                personType='User'
+                                bio={community.bio}
+                                members={community.members}
                             />
                         ))}
                     </>
