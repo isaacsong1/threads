@@ -4,22 +4,24 @@ import { communityTabs } from '@/constants';
 import ProfileHeader from '@/components/shared/ProfileHeader';
 import ThreadsTab from '@/components/shared/ThreadsTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 
 async function Page({ params }: { params: {id: string}}) {
     const user = await currentUser();
     if (!user) return null
 
-    
+    const communityDetails = await fetchCommunityDetails(params.id);
 
     return (
         <section>
             <ProfileHeader 
-                accountId={userInfo.id}
+                accountId={communityDetails.id}
                 authUserId={user.id}
-                name={userInfo.name}
-                username={userInfo.username}
-                imgUrl={userInfo.image}
-                bio={userInfo.bio}
+                name={communityDetails.name}
+                username={communityDetails.username}
+                imgUrl={communityDetails.image}
+                bio={communityDetails.bio}
+                type="Community"
             />
 
             <div className='mt-9'>
