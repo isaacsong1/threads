@@ -40,7 +40,7 @@ interface Props {
 const AccountProfile = ({ user, btnTitle }: Props) => {
     const router = useRouter();
     const pathname = usePathname();
-    const { startUpload } = useUploadThing('media');
+    const { startUpload } = useUploadThing("media");
 
     const [files, setFiles] = useState<File[]>([]);
 
@@ -142,9 +142,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                     accept='image/*'
                                     placeholder='Add profile photo'
                                     className='account-form_image-input'
-                                    onChange={(e) =>
-                                        handleImage(e, field.onChange)
-                                    }
+                                    onChange={(e) => handleImage(e, field.onChange)}
                                 />
                             </FormControl>
                         </FormItem>
