@@ -12,7 +12,7 @@ async function Page({ params }: { params: {id: string}}) {
     if (!user) return null;
 
     const userInfo = await fetchUser(params.id);
-    if (!userInfo?.onboarded) redirect('/onboarding');
+    if (!userInfo?.onboarded) redirect('/sign-up');
 
     return (
         <section>
