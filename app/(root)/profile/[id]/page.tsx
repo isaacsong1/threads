@@ -9,7 +9,7 @@ import ThreadsTab from '@/components/shared/ThreadsTab';
 
 async function Page({ params }: { params: {id: string}}) {
     const user = await currentUser();
-    if (!user) return null;
+    if (!user) redirect('/sign-up');
 
     const userInfo = await fetchUser(params.id);
     if (!userInfo?.onboarded) redirect('/sign-up');
